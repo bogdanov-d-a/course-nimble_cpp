@@ -61,7 +61,7 @@ public:
         : data_(p.data_ ? new int{*p.data_} : nullptr)
     {}
 
-    my_unique_ptr_opt(my_unique_ptr_opt&& p)
+    my_unique_ptr_opt(my_unique_ptr_opt&& p) noexcept
         : data_(p.data_)
     {
         p.data_ = nullptr;
@@ -77,12 +77,12 @@ public:
         return *this;
     }
 
-    my_unique_ptr_opt& operator=(my_unique_ptr_opt&& p) {
+    my_unique_ptr_opt& operator=(my_unique_ptr_opt&& p) noexcept {
         std::swap(data_, p.data_);
         return *this;
     }
 
-    ~my_unique_ptr_opt() {
+    ~my_unique_ptr_opt() noexcept {
         delete data_;
     }
 };
