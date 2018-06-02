@@ -60,24 +60,26 @@ static vs_type generate_optim(std::size_t elements_count) {
         elements_count >>= 1;
         s += static_cast<char>(elements_count % 256);
 
-        v.push_back(s);
+        v.push_back(std::move(s));
     }
 
     return v;
 }
 
 static vs_type filter_optim(vs_type generated) {
-    vs_type dest;
-    dest.resize(generated.size());
+    vs_type dest(generated.size());
 
-    const auto it = std::copy_if(
-        generated.begin(),
-        generated.end(),
-        dest.begin(),
-        [](const std::string& v) { return std::hash<std::string>{}(v) & 1; }
-    );
+	auto genIt = generated.begin();
+	auto destIt = dest.begin();
+	for (; genIt != generated.end(); ++genIt, ++destIt)
+	{
+		if (std::hash<std::string>{}(*genIt) & 1)
+		{
+			*destIt = std::move(*genIt);
+		}
+	}
 
-    dest.erase(it, dest.end());
+    dest.erase(destIt, dest.end());
 
     return dest;
 }
