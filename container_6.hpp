@@ -5,10 +5,11 @@
 
 #include <boost/container/set.hpp>
 #include <boost/unordered_set.hpp>
+#include <boost/container/flat_set.hpp>
 
 //////////////////////////// TASK 6 ////////////////////////////
 
-using naive_assoc_container = std::unordered_set<int>;
+using naive_assoc_container = boost::container::flat_set<int>;
 using optim_assoc_container = std::set<int>;
 
 
