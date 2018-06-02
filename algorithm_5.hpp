@@ -10,11 +10,10 @@ int naive_10_perc_of_not_bankrupted(std::vector<int>& d) {
 }
 
 int optimized_10_perc_of_not_bankrupted(std::vector<int>& d) {
-    // TASK: Improve
-    std::sort(d.begin(), d.end());
-    auto it = std::lower_bound(d.begin(), d.end(), 0);
-    auto end_of_10_perc = it + static_cast<std::size_t>((d.end() - it) * 0.1);
-    return *end_of_10_perc;
+	const auto it = d.begin() + std::count_if(d.begin(), d.end(), [](int value) { return value < 0; });
+	const auto end_of_10_perc = it + static_cast<std::size_t>((d.end() - it) * 0.1);
+	std::partial_sort(d.begin(), end_of_10_perc + 1, d.end());
+	return *end_of_10_perc;
 }
 
 
