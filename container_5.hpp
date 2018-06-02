@@ -19,11 +19,9 @@ struct  my_array {
 struct  my_array_opt {
     int data_[100];
 
-    my_array_opt() {};
-    my_array_opt(int v) {
+    my_array_opt(int v) noexcept {
         std::fill_n(data_, 100, v);
     }
-    ~my_array_opt() {};
 };
 
 
