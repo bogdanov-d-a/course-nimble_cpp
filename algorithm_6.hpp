@@ -14,15 +14,8 @@ struct  naive_complex {
 };
 
 
-struct  optim_complex { // TASK: Improve
-    int real, im;
-
-    optim_complex() {}
-    optim_complex(const optim_complex& nc)
-        : real(nc.real)
-        , im(nc.im)
-    {}
-    ~optim_complex() {}
+struct  optim_complex {
+	int real, im;
 };
 
 
